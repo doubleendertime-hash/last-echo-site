@@ -186,17 +186,41 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .lore-fact-grid{grid-template-columns:1fr}
   .hero-hand-left,.hero-hand-right{display:none}
 }
-.newsletter-embed{
-  display:flex;
-  justify-content:center;
-  position:relative;
-  z-index:1;
-}
 
 .newsletter-embed iframe{
   width:100%;
   max-width:700px;
   height:720px;
+  border:1px solid rgba(196,113,59,.12);
+  background:var(--cave-mid);
+}
+
+.newsletter-cta{
+  display:flex;
+  justify-content:center;
+  margin-top:20px;
+}
+
+.newsletter-embed{
+  display:flex;
+  justify-content:center;
+  margin-top:30px;
+  opacity:1;
+  transition:opacity .5s ease, transform .5s ease;
+}
+
+.newsletter-embed.hidden{
+  opacity:0;
+  transform:translateY(20px);
+  pointer-events:none;
+  height:0;
+  overflow:hidden;
+}
+
+.newsletter-embed iframe{
+  width:100%;
+  max-width:600px;
+  height:400px;
   border:1px solid rgba(196,113,59,.12);
   background:var(--cave-mid);
 }
@@ -529,12 +553,17 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="section-divider" style="margin-left:auto;margin-right:auto"></div>
       <p class="section-subtitle" style="text-align:center">Publication updates, behind-the-scenes worldbuilding, new research papers, and the occasional dispatch from 30,000 years ago. No spam. Unsubscribe anytime.</p>
     </div>
-    <div class="newsletter-embed reveal reveal-delay-2">
+    <div class="newsletter-cta reveal reveal-delay-2">
+      <button id="open-newsletter" class="btn btn-primary">
+        Join the Mailing List
+      </button>
+    </div>
+
+    <div id="newsletter-container" class="newsletter-embed hidden">
       <iframe
         src="https://eepurl.com/jCe_wg"
         title="The Last Echo mailing list signup"
         loading="lazy"
-        style="width:100%; max-width:700px; height:720px; border:0; background:transparent;"
       ></iframe>
     </div>
     <p class="newsletter-note reveal reveal-delay-3">Join early readers and get the first four chapters free when they're available.</p>
@@ -580,6 +609,15 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
 // Subtle parallax on hero hands
 let ticking=false;
 window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{const y=window.scrollY,h=document.querySelector('.hero').offsetHeight;if(y<h){const hands=document.querySelectorAll('#hero-hands .cave-hand');hands.forEach((hand,i)=>{const speed=0.1+i*0.04;hand.style.marginTop=y*speed+'px'})}ticking=false});ticking=true}});
+// Newsletter reveal
+const btn = document.getElementById('open-newsletter');
+const container = document.getElementById('newsletter-container');
+
+btn.addEventListener('click', () => {
+  container.classList.remove('hidden');
+  container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  btn.style.display = 'none';
+});
 </script>
 </body>
 </html>
