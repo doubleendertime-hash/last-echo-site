@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last Echo, A Trilogy by [Author Name]</title>
+<meta name="description" content="An epic fantasy trilogy set 30,000 years ago. Where the Life-Song still echoes in stone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--cave-deepest:#0f0d0b;--cave-deep:#1a1614;--cave-mid:#231f1b;--cave-light:#2e2824;--cave-surface:#3a322c;--ochre:#c4713b;--ochre-bright:#e07040;--ochre-deep:#9a4f25;--firelight:#d4a055;--ember:#e85d3a;--gold:#c9a84c;--text-primary:#e8ddd0;--text-secondary:#b8a898;--text-muted:#8a7b6a;--text-faint:#5a4e42;--font-display:'Cinzel',serif;--font-heading:'Cormorant',serif;--font-body:'Alegreya',serif;--section-padding:clamp(80px,12vh,160px);--content-max:1200px;--content-narrow:800px}
+html{scroll-behavior:smooth;background:var(--cave-deepest);color:var(--text-primary)}
+body{font-family:var(--font-body);font-size:clamp(16px,1.1vw,19px);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--ochre-deep);color:var(--text-primary)}
+a{color:var(--ochre);text-decoration:none;transition:color .3s}
+a:hover{color:var(--firelight)}
+img{max-width:100%;display:block}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-size:256px;pointer-events:none;z-index:9999;opacity:.5}
+
+.cave-hand{position:absolute;opacity:0;transition:opacity 2s ease}
+.cave-hand.visible{opacity:1}
+.section-hands{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(20px,4vw,60px);height:72px;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:background .4s,box-shadow .4s}
+.nav.scrolled{background:rgba(15,13,11,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(196,113,59,.1)}
+.nav-logo{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--text-secondary);transition:color .3s}
+.nav-logo:hover{color:var(--ochre)}
+.nav-links{display:flex;gap:clamp(16px,2.5vw,40px);list-style:none}
+.nav-links a{font-family:var(--font-body);font-size:14px;color:var(--text-muted);letter-spacing:.04em;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--ochre);transition:width .3s}
+.nav-links a:hover{color:var(--text-primary)}
+.nav-links a:hover::after{width:100%}
+.nav-links .btn::after{display:none}
+.nav-mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.nav-mobile-toggle span{display:block;width:24px;height:2px;background:var(--text-secondary);margin:5px 0;transition:all .3s}
+
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px clamp(20px,5vw,60px) 80px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(196,113,59,.08) 0%,transparent 70%),radial-gradient(ellipse 80% 40% at 30% 80%,rgba(212,160,85,.05) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 70% 30%,rgba(154,79,37,.04) 0%,transparent 50%)}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom,transparent,var(--cave-deepest));z-index:1}
+.embers{position:absolute;inset:0;overflow:hidden;z-index:0}
+.ember{position:absolute;width:2px;height:2px;background:var(--ochre);border-radius:50%;opacity:0;animation:float-ember linear infinite}
+@keyframes float-ember{0%{opacity:0;transform:translateY(0) translateX(0)}10%{opacity:.8}90%{opacity:.3}100%{opacity:0;transform:translateY(-100vh) translateX(40px)}}
+.hero-content{position:relative;z-index:2;max-width:900px}
+.hero-supertitle{font-family:var(--font-body);font-size:clamp(13px,1vw,15px);letter-spacing:.35em;text-transform:uppercase;color:var(--ochre);margin-bottom:32px;opacity:0;animation:fade-up 1s .3s forwards}
+.hero-title{font-family:var(--font-display);font-size:clamp(42px,7vw,96px);font-weight:400;letter-spacing:.12em;line-height:1.1;color:var(--text-primary);margin-bottom:8px;opacity:0;animation:fade-up 1.2s .5s forwards}
+.hero-title span{display:block;font-size:.38em;letter-spacing:.5em;color:var(--text-muted);margin-top:12px;font-weight:400}
+.hero-divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--ochre),transparent);margin:32px auto;opacity:0;animation:fade-up 1s .8s forwards}
+.hero-tagline{font-family:var(--font-heading);font-size:clamp(18px,2vw,26px);font-weight:300;font-style:italic;color:var(--text-secondary);line-height:1.5;max-width:600px;margin:0 auto 48px;opacity:0;animation:fade-up 1s 1s forwards}
+.hero-cta-group{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fade-up 1s 1.2s forwards}
+@keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fade-up 1s 1.8s forwards}
+.scroll-hint span{font-family:var(--font-body);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-faint)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--text-faint),transparent);animation:scroll-pulse 2s ease-in-out infinite}
+@keyframes scroll-pulse{0%,100%{opacity:.3}50%{opacity:.8}}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-family:var(--font-body);font-size:15px;font-weight:500;letter-spacing:.05em;border:none;cursor:pointer;transition:all .35s;position:relative;overflow:hidden}
+.btn-primary{background:var(--ochre);color:var(--cave-deepest)}
+.btn-primary:hover{background:var(--ochre-bright);color:var(--cave-deepest);transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,113,59,.3)}
+.btn-ghost{background:transparent;color:var(--text-secondary);border:1px solid var(--cave-surface)}
+.btn-ghost:hover{border-color:var(--ochre);color:var(--ochre);transform:translateY(-2px)}
+.btn-sm{padding:10px 24px;font-size:13px}
+.nav-links .btn-primary{color:var(--cave-deepest);font-weight:600}
+.nav-links .btn-primary:hover{color:var(--cave-deepest)}
+
+.section{padding:var(--section-padding) clamp(20px,5vw,60px);position:relative}
+.section-inner{max-width:var(--content-max);margin:0 auto;position:relative;z-index:1}
+.section-narrow{max-width:var(--content-narrow);margin:0 auto;position:relative;z-index:1}
+.section-label{font-family:var(--font-body);font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--ochre);margin-bottom:16px}
+.section-title{font-family:var(--font-heading);font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.2;color:var(--text-primary);margin-bottom:20px}
+.section-subtitle{font-family:var(--font-body);font-size:clamp(16px,1.2vw,19px);color:var(--text-secondary);line-height:1.7;max-width:640px}
+.section-divider{width:40px;height:1px;background:var(--ochre-deep);margin:24px 0}
+.section-dark{background:var(--cave-deepest)}
+.section-mid{background:var(--cave-deep)}
+.section-stone{background:var(--cave-mid);border-top:1px solid rgba(196,113,59,.08);border-bottom:1px solid rgba(196,113,59,.08)}
+
+.trilogy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px);margin-top:60px}
+.book-card{background:var(--cave-mid);border:1px solid rgba(196,113,59,.08);padding:clamp(28px,3vw,44px);position:relative;transition:all .4s;overflow:hidden}
+.book-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--ochre-deep),transparent);opacity:0;transition:opacity .4s}
+.book-card:hover{transform:translateY(-4px);border-color:rgba(196,113,59,.2);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.book-card:hover::before{opacity:1}
+.book-number{font-family:var(--font-display);font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--ochre);margin-bottom:16px}
+.book-title{font-family:var(--font-heading);font-size:clamp(24px,2.5vw,34px);font-weight:400;color:var(--text-primary);margin-bottom:8px;line-height:1.2}
+.book-arc{font-family:var(--font-body);font-size:14px;font-style:italic;color:var(--ochre);margin-bottom:20px}
+.book-description{font-size:15px;color:var(--text-secondary);line-height:1.75}
+.book-card.featured{border-color:rgba(196,113,59,.2);background:linear-gradient(170deg,var(--cave-mid) 0%,rgba(154,79,37,.08) 100%)}
+.book-badge{display:inline-block;font-family:var(--font-body);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ochre);background:rgba(196,113,59,.1);border:1px solid rgba(196,113,59,.2);padding:4px 12px;margin-top:20px}
+
+.lore-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);margin-top:60px;align-items:start}
+.lore-text h3{font-family:var(--font-heading);font-size:clamp(22px,2vw,30px);font-weight:400;color:var(--text-primary);margin-bottom:16px;margin-top:36px}
+.lore-text h3:first-child{margin-top:0}
+.lore-text p{color:var(--text-secondary);margin-bottom:16px;font-size:15.5px}
+.lore-sidebar{position:sticky;top:120px}
+.lore-quote-box{background:var(--cave-deep);border-left:2px solid var(--ochre-deep);padding:clamp(24px,3vw,40px);margin-bottom:32px}
+.lore-quote-box blockquote{font-family:var(--font-heading);font-size:clamp(18px,1.6vw,24px);font-weight:300;font-style:italic;color:var(--text-primary);line-height:1.6}
+.lore-quote-box cite{display:block;font-family:var(--font-body);font-size:13px;color:var(--text-muted);font-style:normal;margin-top:16px;letter-spacing:.05em}
+.lore-fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lore-fact{background:var(--cave-deep);padding:20px;border:1px solid rgba(196,113,59,.06)}
+.lore-fact-number{font-family:var(--font-display);font-size:clamp(24px,2vw,32px);font-weight:400;color:var(--ochre);line-height:1;margin-bottom:6px}
+.lore-fact-label{font-size:12px;color:var(--text-muted);letter-spacing:.05em}
+
+.chapters-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;margin-top:60px}
+.chapters-visual{position:relative;padding:40px}
+.chapters-visual-inner{background:var(--cave-mid);border:1px solid rgba(196,113,59,.12);padding:clamp(32px,4vw,56px);text-align:center;position:relative}
+.chapters-visual-inner::after{content:'';position:absolute;inset:8px;border:1px solid rgba(196,113,59,.06);pointer-events:none}
+.chapters-icon{font-family:var(--font-display);font-size:48px;color:var(--ochre-deep);margin-bottom:20px;line-height:1}
+.chapters-visual-title{font-family:var(--font-display);font-size:clamp(16px,1.5vw,20px);letter-spacing:.15em;color:var(--text-primary);margin-bottom:4px}
+.chapters-visual-sub{font-family:var(--font-heading);font-size:clamp(20px,2vw,28px);font-weight:300;font-style:italic;color:var(--firelight);margin-bottom:24px}
+.chapters-list{list-style:none;text-align:left;max-width:280px;margin:0 auto}
+.chapters-list li{padding:10px 0;border-bottom:1px solid rgba(196,113,59,.06);font-size:14.5px;color:var(--text-secondary);display:flex;gap:12px}
+.chapters-list li:last-child{border-bottom:none}
+.chapters-list .ch-num{font-family:var(--font-display);font-size:11px;color:var(--text-muted);letter-spacing:.1em;min-width:56px}
+.chapters-content h3{font-family:var(--font-heading);font-size:clamp(20px,2vw,28px);font-weight:400;color:var(--text-primary);margin-bottom:20px}
+.chapters-content p{color:var(--text-secondary);margin-bottom:16px;font-size:15.5px}
+.chapters-content .btn{margin-top:12px}
+
+.research-intro{max-width:700px;margin-bottom:56px}
+.research-intro p{color:var(--text-secondary);font-size:15.5px}
+.research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.paper-card{background:var(--cave-deep);border:1px solid rgba(196,113,59,.06);padding:clamp(24px,2.5vw,36px);transition:all .35s;display:flex;flex-direction:column}
+.paper-card:hover{border-color:rgba(196,113,59,.2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.paper-category{font-family:var(--font-body);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ochre);margin-bottom:12px}
+.paper-title{font-family:var(--font-heading);font-size:clamp(18px,1.6vw,24px);font-weight:400;color:var(--text-primary);line-height:1.35;margin-bottom:12px}
+.paper-abstract{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:20px;flex-grow:1}
+.paper-meta{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid rgba(196,113,59,.06)}
+.paper-format{font-size:12px;color:var(--text-faint);letter-spacing:.05em}
+.paper-download{font-family:var(--font-body);font-size:13px;color:var(--ochre);letter-spacing:.05em;display:flex;align-items:center;gap:6px;transition:color .3s}
+.paper-download:hover{color:var(--firelight)}
+.paper-download svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+.about-layout{display:grid;grid-template-columns:300px 1fr;gap:clamp(40px,6vw,80px);align-items:start;margin-top:60px}
+.about-photo{aspect-ratio:3/4;background:var(--cave-mid);border:1px solid rgba(196,113,59,.1);position:relative;overflow:hidden}
+.about-photo-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--text-faint);font-size:13px;letter-spacing:.1em}
+.about-photo-placeholder svg{width:48px;height:48px;stroke:var(--text-faint);fill:none;stroke-width:1}
+.about-text h3{font-family:var(--font-heading);font-size:clamp(22px,2vw,30px);font-weight:400;color:var(--text-primary);margin-bottom:24px}
+.about-text p{color:var(--text-secondary);margin-bottom:16px;font-size:15.5px}
+.about-text p:last-of-type{margin-bottom:0}
+
+.lascaux-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
+.lascaux-subsection{margin-top:clamp(60px,8vh,100px);padding-top:clamp(60px,8vh,100px);border-top:1px solid rgba(196,113,59,.08)}
+.lascaux-description{color:var(--text-secondary);margin-bottom:16px;font-size:15.5px}
+.lascaux-credit{font-size:12px;color:var(--text-faint);margin-top:12px;letter-spacing:.04em}
+.lascaux-visual-inner{background:var(--cave-deep);border:1px solid rgba(196,113,59,.1);padding:20px;position:relative}
+.lascaux-caption{font-family:var(--font-body);font-size:12px;color:var(--text-faint);text-align:center;margin-top:12px;letter-spacing:.06em;font-style:italic}
+
+.newsletter-section{text-align:center;overflow:hidden}
+.newsletter-section .section-title{margin-left:auto;margin-right:auto}
+.newsletter-section .section-subtitle{margin-left:auto;margin-right:auto;margin-bottom:40px}
+.newsletter-form{display:flex;gap:12px;max-width:520px;margin:0 auto;position:relative;z-index:1}
+.newsletter-input{flex:1;padding:14px 20px;background:var(--cave-mid);border:1px solid var(--cave-surface);color:var(--text-primary);font-family:var(--font-body);font-size:15px;outline:none;transition:border-color .3s}
+.newsletter-input::placeholder{color:var(--text-faint)}
+.newsletter-input:focus{border-color:var(--ochre)}
+.newsletter-note{font-size:13px;color:var(--text-faint);margin-top:16px;position:relative;z-index:1}
+
+.footer{padding:40px clamp(20px,5vw,60px);border-top:1px solid rgba(196,113,59,.06);display:flex;justify-content:space-between;align-items:center;max-width:var(--content-max);margin:0 auto}
+.footer-left{font-size:13px;color:var(--text-faint)}
+.footer-right{display:flex;gap:24px}
+.footer-right a{font-size:13px;color:var(--text-faint)}
+.footer-right a:hover{color:var(--ochre)}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+@media(max-width:1024px){
+  .trilogy-grid{grid-template-columns:1fr;max-width:600px}
+  .lore-layout{grid-template-columns:1fr}
+  .lore-sidebar{position:static}
+  .research-grid{grid-template-columns:1fr}
+  .chapters-layout{grid-template-columns:1fr}
+  .about-layout{grid-template-columns:1fr;max-width:600px}
+  .about-photo{max-width:280px}
+  .lascaux-layout{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-mobile-toggle{display:block}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:rgba(15,13,11,.96);backdrop-filter:blur(16px);padding:24px clamp(20px,5vw,60px);gap:20px;border-bottom:1px solid rgba(196,113,59,.1)}
+  .newsletter-form{flex-direction:column}
+  .footer{flex-direction:column;gap:16px;text-align:center}
+  .lore-fact-grid{grid-template-columns:1fr}
+  .hero-hand-left,.hero-hand-right{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Definitions: Cave Hand Stencils -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden;">
+<defs>
+  <filter id="spray-soft" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="4" seed="7" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+    <feGaussianBlur in="displaced" stdDeviation="1.2"/>
+  </filter>
+  <radialGradient id="spray-halo" cx="50%" cy="50%" r="50%">
+    <stop offset="25%" stop-color="currentColor" stop-opacity="0.55"/>
+    <stop offset="50%" stop-color="currentColor" stop-opacity="0.25"/>
+    <stop offset="75%" stop-color="currentColor" stop-opacity="0.08"/>
+    <stop offset="100%" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+
+  <!-- Left hand, spread fingers -->
+  <g id="hand-1">
+    <path d="M80,280 C78,260 72,240 68,220 C64,200 60,180 58,160 C56,142 58,130 62,124 C66,118 72,116 78,118 C82,120 84,126 84,134 L86,155 C86,148 84,130 84,118 C84,102 82,80 82,62 C82,48 86,38 92,34 C98,30 104,32 108,38 C112,44 114,56 114,72 L114,108 C114,98 116,78 118,62 C120,46 124,34 130,30 C136,26 142,30 146,38 C150,48 150,62 148,82 L144,112 C146,98 150,80 156,68 C160,58 166,52 172,52 C178,52 182,58 184,68 C186,78 184,94 180,112 L170,148 C178,134 186,124 192,120 C198,116 204,118 208,126 C212,134 210,148 204,166 L184,210 C176,230 164,248 152,262 C140,276 126,286 112,290 C98,294 88,290 80,280 Z" fill="currentColor"/>
+  </g>
+
+  <!-- Right hand, fingers together -->
+  <g id="hand-2">
+    <path d="M160,280 C162,260 168,240 172,220 C176,200 180,180 182,160 C184,142 182,130 178,124 C174,118 168,116 162,118 C158,120 156,126 156,134 L154,155 C154,148 156,130 156,118 C156,102 158,80 158,62 C158,48 154,38 148,34 C142,30 136,32 132,38 C128,44 126,56 126,72 L126,108 C126,98 124,78 122,62 C120,46 116,34 110,30 C104,26 98,30 94,38 C90,48 90,62 92,82 L96,112 C94,98 90,80 84,68 C80,58 74,52 68,52 C62,52 58,58 56,68 C54,78 56,94 60,112 L70,148 C62,134 54,124 48,120 C42,116 36,118 32,126 C28,134 30,148 36,166 L56,210 C64,230 76,248 88,262 C100,276 114,286 128,290 C142,294 152,290 160,280 Z" fill="currentColor"/>
+  </g>
+
+  <!-- Left hand, relaxed curve -->
+  <g id="hand-3">
+    <path d="M76,270 C74,252 70,235 66,218 C62,200 58,182 56,164 C54,148 56,136 60,130 C64,124 70,122 76,124 C80,126 82,132 82,140 L84,158 C84,150 82,134 82,122 C82,106 80,86 80,68 C80,54 84,44 90,40 C96,36 102,38 106,44 C110,50 112,62 112,78 L112,112 C112,102 114,84 116,68 C118,52 122,42 128,38 C134,34 140,38 142,46 C146,56 144,70 142,88 L138,118 C140,104 144,88 150,76 C154,66 160,60 166,60 C172,60 176,66 178,76 C180,86 178,100 174,118 L164,152 C172,138 180,128 186,124 C192,120 196,122 200,130 C204,138 200,152 194,170 L174,214 C166,234 154,250 142,264 C130,278 116,286 104,288 C92,290 82,284 76,270 Z" fill="currentColor"/>
+  </g>
+</defs>
+</svg>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">The Last Echo Project</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#trilogy">The Trilogy</a></li>
+    <li><a href="#world">The World</a></li>
+    <li><a href="#chapters">Free Chapters</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#author">Author</a></li>
+    <li><a href="#newsletter" class="btn btn-sm btn-primary" style="margin-left:8px;">Get Updates</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="embers" id="embers"></div>
+
+  <!-- Cave hand stencils flanking the hero -->
+  <div class="section-hands" id="hero-hands">
+    <svg class="cave-hand hero-hand-left" viewBox="0 0 240 340" style="position:absolute;left:2%;top:15%;width:clamp(160px,18vw,280px);color:#6b3d20;transition:opacity 2.5s .6s ease" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="115" ry="165" fill="url(#spray-halo)" opacity=".5"/>
+      <use href="#hand-1" filter="url(#spray-soft)" opacity=".35"/>
+    </svg>
+    <svg class="cave-hand hero-hand-left" viewBox="0 0 240 340" style="position:absolute;left:9%;top:42%;width:clamp(110px,12vw,190px);color:#7a4528;transition:opacity 2.5s 1.2s ease;transform:rotate(-12deg)" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="115" ry="165" fill="url(#spray-halo)" opacity=".4"/>
+      <use href="#hand-3" filter="url(#spray-soft)" opacity=".25"/>
+    </svg>
+    <svg class="cave-hand hero-hand-right" viewBox="0 0 240 340" style="position:absolute;right:3%;top:20%;width:clamp(140px,16vw,260px);color:#6b3d20;transition:opacity 2.5s .9s ease;transform:rotate(8deg)" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="115" ry="165" fill="url(#spray-halo)" opacity=".45"/>
+      <use href="#hand-2" filter="url(#spray-soft)" opacity=".3"/>
+    </svg>
+    <svg class="cave-hand hero-hand-right" viewBox="0 0 240 340" style="position:absolute;right:14%;bottom:16%;width:clamp(80px,8vw,140px);color:#5a3018;transition:opacity 3s 1.6s ease;transform:rotate(-5deg)" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="115" ry="165" fill="url(#spray-halo)" opacity=".3"/>
+      <use href="#hand-1" filter="url(#spray-soft)" opacity=".18"/>
+    </svg>
+    <!-- Small child-sized hand near center-left — Kye's first? -->
+    <svg class="cave-hand hero-hand-left" viewBox="0 0 240 340" style="position:absolute;left:18%;bottom:28%;width:clamp(55px,5vw,90px);color:#8a5530;transition:opacity 3s 2s ease;transform:rotate(5deg)" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="115" ry="165" fill="url(#spray-halo)" opacity=".35"/>
+      <use href="#hand-3" filter="url(#spray-soft)" opacity=".22"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-supertitle">An epic fantasy trilogy set 30,000 years ago</p>
+    <h1 class="hero-title">THE LAST ECHO<span>A Trilogy</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Nothing that has ever lived is entirely gone.<br>Some things only need someone who can listen.</p>
+    <div class="hero-cta-group">
+      <a href="#chapters" class="btn btn-primary">Read the Prologue - Chapter 3 Free</a>
+      <a href="#newsletter" class="btn btn-ghost">Join the Mailing List</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- TRILOGY -->
+<section class="section section-mid" id="trilogy">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">The Trilogy</p>
+      <h2 class="section-title">Three Books. One Echo.</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">A young Neanderthal woman with an overwhelming gift. An anatomically modern Human defector carrying unspeakable secrets. A genocidal army advancing through the ice. And a power rooted in the living earth that may be the only thing that can save them. Or destroy her.</p>
+    </div>
+    <div class="trilogy-grid">
+      <div class="book-card featured reveal reveal-delay-1">
+        <p class="book-number">Book One</p>
+        <h3 class="book-title">The Listening</h3>
+        <p class="book-arc">Innocence → Awakening</p>
+        <p class="book-description">Kye hears the world the way no one else can. Every creature, every stone, every shift in the wind. When a wounded stranger arrives at her tribe's shelter, he brings warnings of a force that will shatter everything she knows. Two deaths, a devastating betrayal, and her first desperate act of power will drive her from the only home she has ever known.</p>
+        <span class="book-badge">Coming Soon</span>
+      </div>
+      <div class="book-card reveal reveal-delay-2">
+        <p class="book-number">Book Two</p>
+        <h3 class="book-title">The Shattering</h3>
+        <p class="book-arc">Exile → Leadership</p>
+        <p class="book-description">A refugee with twenty survivors and a wolf, Kye must build an alliance of tribes who have never united. The greatest gathering of her people in living memory becomes their greatest catastrophe. The woman who emerges from the devastation is not the woman who entered it.</p>
+      </div>
+      <div class="book-card reveal reveal-delay-3">
+        <p class="book-number">Book Three</p>
+        <h3 class="book-title">The Melding</h3>
+        <p class="book-arc">War → Transcendence</p>
+        <p class="book-description">A guerrilla war fought through the darkest winter. A capture that exposes secrets buried across generations. A final act of power that shows an enemy not terror, but truth. The accumulated weight of everything they destroyed. And a woman racing to say goodbye before she becomes part of the earth she loves.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORLD LORE -->
+<section class="section section-dark" id="world">
+  <div class="section-hands">
+    <svg class="cave-hand" viewBox="0 0 240 340" style="position:absolute;right:-2%;top:8%;width:clamp(100px,11vw,180px);color:#3a2a1a;transition:opacity 2s ease;transform:rotate(15deg) scaleX(-1)" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="115" ry="165" fill="url(#spray-halo)" opacity=".4"/>
+      <use href="#hand-2" filter="url(#spray-soft)" opacity=".22"/>
+    </svg>
+    <svg class="cave-hand" viewBox="0 0 240 340" style="position:absolute;left:-3%;bottom:12%;width:clamp(80px,8vw,140px);color:#3a2a1a;transition:opacity 2s .3s ease;transform:rotate(-20deg)" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="115" ry="165" fill="url(#spray-halo)" opacity=".35"/>
+      <use href="#hand-3" filter="url(#spray-soft)" opacity=".18"/>
+    </svg>
+  </div>
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">The World</p>
+      <h2 class="section-title">30,000 Years Ago, the Earth Sang</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="lore-layout">
+      <div class="lore-text reveal">
+        <h3>The Life-Song</h3>
+        <p>Every living thing carries its own Song. Distinct as a voice, unmistakable as a face. Every place where life has passed retains an echo of what moved through it. The dead sing faintly in the stone where they were laid. A forest hums with the layered Songs of every plant and creature within it.</p>
+        <p>This is not magic. It is simply what the world feels like when you have the capacity to sense it. A constant, synesthetic awareness. Sound that is also texture, color that is also feeling, temperature that is also melody.</p>
+        <h3>The Setting</h3>
+        <p>The Vézère Valley, southwestern France. Limestone cliffs riddled with shelters and deep caves. The Last Glacial Maximum is closing in. Ice sheets advancing, game routes shifting, the world getting colder and smaller. The Neanderthal tribes who have lived here for millennia find their territory shrinking as a new species pushes westward.</p>
+        <h3>Two Peoples, Two Worldviews</h3>
+        <p>The Neanderthals see the world as interconnected. Every creature, every stone, part of a living whole. The anatomically modern Humans see it as a hierarchy to be dominated. Neither view is entirely wrong. The collision between them is the story's philosophical engine.</p>
+      </div>
+      <div class="lore-sidebar reveal reveal-delay-2">
+        <div class="lore-quote-box">
+          <blockquote>"Not the whole mountain. Just the stone under your hand."</blockquote>
+          <cite>Witt, Song-Chosen of the Flint-Keepers</cite>
+        </div>
+        <div class="lore-fact-grid">
+          <div class="lore-fact"><p class="lore-fact-number">~30,000</p><p class="lore-fact-label">Years before present</p></div>
+          <div class="lore-fact"><p class="lore-fact-number">3</p><p class="lore-fact-label">Books in the trilogy</p></div>
+          <div class="lore-fact"><p class="lore-fact-number">2</p><p class="lore-fact-label">Species of human</p></div>
+          <div class="lore-fact"><p class="lore-fact-number">1</p><p class="lore-fact-label">Wolf who steals food</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discover Lascaux — integrated subsection -->
+    <div class="lascaux-subsection">
+      <div class="lascaux-layout">
+        <div class="lascaux-text reveal">
+          <p class="section-label">Step Inside A Real Cave</p>
+          <h3 class="lore-text-h3" style="font-family:var(--font-heading);font-size:clamp(22px,2vw,30px);font-weight:400;color:var(--text-primary);margin-bottom:16px">Discover Chauvet-Pont d'Arc Cave</h3>
+          <p class="lascaux-description">The world of <em>The Last Echo</em> is rooted in real places. The Vézère Valley in southwestern France, where Kye's people shelter in limestone cliffs, is surrounded by some of the most extraordinary cave art on Earth.</p>
+          <p class="lascaux-description">Chauvet-Pont d'Arc Cave, discovered in 1994 in the Ardèche gorges of southern France, contains the oldest known figurative art ever found. Paintings created over 36,000 years ago. Horses, lions, rhinoceroses, and mammoths rendered with astonishing skill and movement across the stone, by hands that understood shadow, perspective, and the living presence of animals. The cave has never been opened to the public, but the French Ministry of Culture has built a stunning virtual experience that lets you walk through its chambers from anywhere in the world.</p>
+          <p class="lascaux-description">Step inside. See the walls that were alive with the Songs of the people who painted them. Stand where they stood, and sense the echo for yourself.</p>
+          <a href="https://archeologie.culture.gouv.fr/chauvet/en" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:24px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Explore Chauvet Cave
+          </a>
+          <p class="lascaux-credit">Virtual tour provided by the French Ministry of Culture</p>
+        </div>
+        <div class="lascaux-visual reveal reveal-delay-2">
+          <div class="lascaux-visual-inner">
+            <a href="https://archeologie.culture.gouv.fr/chauvet/en" target="_blank" rel="noopener noreferrer"><img src="assets/images/chauvet-cave.jpg" alt="Prehistoric cave paintings from Chauvet-Pont d'Arc Cave showing horses, rhinoceroses, and aurochs rendered in charcoal on limestone. Among the oldest figurative art in the world, dating to over 36,000 years ago." style="width:100%;height:auto;display:block;"></a>
+            <p class="lascaux-caption">Chauvet-Pont d'Arc Cave, Ardèche, France · ~36,000 years old</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE CHAPTERS -->
+<section class="section section-stone" id="chapters">
+  <div class="section-inner">
+    <div class="chapters-layout">
+      <div class="chapters-visual reveal">
+        <div class="chapters-visual-inner">
+          <div class="chapters-icon">◊</div>
+          <p class="chapters-visual-title">THE LAST ECHO</p>
+          <p class="chapters-visual-sub">The Listening</p>
+          <ul class="chapters-list">
+            <li><span class="ch-num">Prologue</span></li>
+            <li><span class="ch-num">Ch. 1</span> Dawn</li>
+            <li><span class="ch-num">Ch. 2</span> The Fire</li>
+            <li><span class="ch-num">Ch. 3</span> The Stranger</li>
+          </ul>
+        </div>
+      </div>
+      <div class="chapters-content reveal reveal-delay-2">
+        <p class="section-label">Free Sample</p>
+        <h3>Begin the Journey</h3>
+        <p>Enter the Vézère Valley in late summer, thirty thousand years ago. Walk with Kye through her ordinary world. The flint-knapping, the training, the warmth of firelight on limestone walls. Then the stranger arrives and everything changes.</p>
+        <p>Download the Prologue and first three chapters of <em>The Listening</em> as a free PDF. No spoilers, no commitment. Just the opening pages of an epic that spans three books and thirty millennia.</p>
+        <a href="#" class="btn btn-primary" onclick="alert('Download link coming soon! Join the mailing list to be first to know.'); return false;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Free Chapters (PDF)
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECULATIVE RESEARCH -->
+<section class="section section-dark" id="research">
+  <div class="section-hands">
+    <svg class="cave-hand" viewBox="0 0 240 340" style="position:absolute;left:1%;top:30%;width:clamp(70px,7vw,120px);color:#2e2218;transition:opacity 2s ease;transform:rotate(-8deg)" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="115" ry="165" fill="url(#spray-halo)" opacity=".35"/>
+      <use href="#hand-1" filter="url(#spray-soft)" opacity=".15"/>
+    </svg>
+    <svg class="cave-hand" viewBox="0 0 240 340" style="position:absolute;right:0;bottom:20%;width:clamp(60px,6vw,100px);color:#2e2218;transition:opacity 2s .4s ease;transform:rotate(22deg) scaleX(-1)" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="115" ry="165" fill="url(#spray-halo)" opacity=".3"/>
+      <use href="#hand-3" filter="url(#spray-soft)" opacity=".12"/>
+    </svg>
+  </div>
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Speculative Research</p>
+      <h2 class="section-title">Whitepapers from the World of <em>The Last Echo</em></h2>
+      <div class="section-divider"></div>
+      <div class="research-intro">
+        <p>These speculative academic papers explore the real science, archaeology, and anthropology behind the world of <em>The Last Echo</em>. Blending peer-reviewed research with the trilogy's fictional framework, each paper examines what might have been, and what we're still discovering about the people who came before us.</p>
+      </div>
+    </div>
+    <div class="research-grid">
+      <div class="paper-card reveal reveal-delay-1">
+        <p class="paper-category">Neurology &amp; Perception</p>
+        <h4 class="paper-title">The Life-Song Hypothesis: Synesthetic Perception in <em>Homo Neanderthalensis</em></h4>
+        <p class="paper-abstract">Could the larger Neanderthal brain, with its expanded occipital and temporal regions, have supported a form of cross-modal sensory integration that modern humans would experience as synesthesia? This paper proposes a neurological basis for the Life-Song.</p>
+        <div class="paper-meta"><span class="paper-format">PDF · 18 pages</span><a href="#" class="paper-download" onclick="alert('Coming soon! Join the mailing list to be notified.'); return false;">Download <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a></div>
+      </div>
+      <div class="paper-card reveal reveal-delay-2">
+        <p class="paper-category">Archaeology &amp; Culture</p>
+        <h4 class="paper-title">The Invisible Record: Why Neanderthal Cultural Sophistication Left No Trace</h4>
+        <p class="paper-abstract">Modern archaeology has found scant evidence of Neanderthal symbolic culture. But what if they created extensively in materials like wood, hide, and non-durable pigments that simply did not survive?</p>
+        <div class="paper-meta"><span class="paper-format">PDF · 14 pages</span><a href="#" class="paper-download" onclick="alert('Coming soon! Join the mailing list to be notified.'); return false;">Download <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a></div>
+      </div>
+      <div class="paper-card reveal reveal-delay-3">
+        <p class="paper-category">Genetics &amp; Identity</p>
+        <h4 class="paper-title">Between Two Worlds: Hybridization, Identity, and the Genetic Legacy of Coexistence</h4>
+        <p class="paper-abstract">Modern humans carry 1–4% Neanderthal DNA. What does this inheritance tell us about the nature of contact between species, and what might it have meant for the hybrid individuals who lived between two peoples?</p>
+        <div class="paper-meta"><span class="paper-format">PDF · 22 pages</span><a href="#" class="paper-download" onclick="alert('Coming soon! Join the mailing list to be notified.'); return false;">Download <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a></div>
+      </div>
+      <div class="paper-card reveal reveal-delay-4">
+        <p class="paper-category">Climate &amp; Migration</p>
+        <h4 class="paper-title">The Closing World: Climate, Competition, and the Last Glacial Maximum</h4>
+        <p class="paper-abstract">As ice sheets advanced and habitable zones shrank, two human species were forced into increasingly overlapping territories. This paper maps the environmental pressures that turned coexistence into collision.</p>
+        <div class="paper-meta"><span class="paper-format">PDF · 16 pages</span><a href="#" class="paper-download" onclick="alert('Coming soon! Join the mailing list to be notified.'); return false;">Download <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a></div>
+      </div>
+      <div class="paper-card reveal reveal-delay-1">
+        <p class="paper-category">Ritual &amp; Cosmology</p>
+        <h4 class="paper-title">The Melded: Death Rites, Geological Memory, and the Archaeology of Belief</h4>
+        <p class="paper-abstract">Neanderthal burial practices suggest a sophisticated relationship with death. This paper explores the archaeological evidence for intentional burial and proposes a speculative cosmology in which the dead persist in the earth itself.</p>
+        <div class="paper-meta"><span class="paper-format">PDF · 20 pages</span><a href="#" class="paper-download" onclick="alert('Coming soon! Join the mailing list to be notified.'); return false;">Download <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a></div>
+      </div>
+      <div class="paper-card reveal reveal-delay-2">
+        <p class="paper-category">Ethology &amp; Domestication</p>
+        <h4 class="paper-title">Yellow Eyes: Pleistocene Wolf Behavior and the Origins of the Human-Canine Bond</h4>
+        <p class="paper-abstract">Long before agriculture, before civilization, something passed between a wolf and a human. Was the earliest domestication a gradual process of mutual benefit, or a single, improbable act of trust?</p>
+        <div class="paper-meta"><span class="paper-format">PDF · 12 pages</span><a href="#" class="paper-download" onclick="alert('Coming soon! Join the mailing list to be notified.'); return false;">Download <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section section-mid" id="author">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">The Author</p>
+      <h2 class="section-title">About the Writer</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="about-layout">
+      <div class="about-photo reveal">
+        <div class="about-photo-placeholder">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+          Author Photo
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-2">
+        <h3>[Author Name]</h3>
+        <p>[Your bio goes here. A few paragraphs about yourself. What drew you to this story, your background, what readers can expect. This is your chance to connect personally with future readers. Keep it warm, keep it honest, keep it you.]</p>
+        <p>[Perhaps a paragraph about the research behind the trilogy. The years spent studying Neanderthal archaeology, Pleistocene climatology, the Vézère Valley itself. The kind of detail that signals to a reader that this person cared enough to get it right.]</p>
+        <p>[And perhaps a closing thought about why this story matters to you. What it means to write about the last of a people, about what survives when everything else is lost.]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- NEWSLETTER with central hand stencil -->
+<section class="section newsletter-section" id="newsletter">
+  <div class="section-hands" style="z-index:0">
+    <svg class="cave-hand" viewBox="0 0 240 340" style="position:absolute;left:50%;top:50%;width:clamp(300px,32vw,520px);transform:translate(-50%,-50%);color:#4a2e18;transition:opacity 2.5s ease" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="170" rx="118" ry="168" fill="url(#spray-halo)" opacity=".3"/>
+      <use href="#hand-1" filter="url(#spray-soft)" opacity=".1"/>
+    </svg>
+  </div>
+  <div class="section-narrow">
+    <div class="reveal">
+      <p class="section-label">Stay Connected</p>
+      <h2 class="section-title">The Echo Reaches Forward</h2>
+      <div class="section-divider" style="margin-left:auto;margin-right:auto"></div>
+      <p class="section-subtitle" style="text-align:center">Publication updates, behind-the-scenes worldbuilding, new research papers, and the occasional dispatch from 30,000 years ago. No spam. Unsubscribe anytime.</p>
+    </div>
+    <form class="newsletter-form reveal reveal-delay-2" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:var(--ochre);font-family:var(--font-heading);font-size:20px;font-style:italic;padding:14px 0\'>The Song carries your name now. Welcome.</p>'; return false;">
+      <input type="email" class="newsletter-input" placeholder="Your email address" required>
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+    <p class="newsletter-note reveal reveal-delay-3">Join early readers and get the first four chapters free when they're available.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left"><p>&copy; 2026 [Author Name]. <em>The Last Echo</em> and all related content.</p></div>
+  <div class="footer-right"><a href="privacy-policy.html">Privacy</a><a href="#">Contact</a></div>
+</footer>
+
+<script>
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)});
+
+// Mobile nav
+const navToggle=document.getElementById('nav-toggle'),navLinks=document.getElementById('nav-links');
+navToggle.addEventListener('click',()=>{navLinks.classList.toggle('open')});
+navLinks.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+// Embers
+const embers=document.getElementById('embers');
+function createEmber(){const e=document.createElement('div');e.classList.add('ember');e.style.left=Math.random()*100+'%';e.style.bottom='-10px';const s=(Math.random()*2+1)+'px';e.style.width=s;e.style.height=s;e.style.animationDuration=(Math.random()*8+6)+'s';e.style.animationDelay=(Math.random()*4)+'s';e.style.background=`hsl(${Math.random()>.5?25:15},80%,${50+Math.random()*20}%)`;embers.appendChild(e);setTimeout(()=>e.remove(),16000)}
+for(let i=0;i<12;i++)setTimeout(createEmber,i*600);
+setInterval(createEmber,1200);
+
+// Reveal on scroll
+const revealObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// Cave hands reveal (lower threshold, earlier trigger)
+const handObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');handObs.unobserve(e.target)}})},{threshold:.02,rootMargin:'120px 0px 0px 0px'});
+document.querySelectorAll('.cave-hand').forEach(el=>handObs.observe(el));
+
+// Hero hands on load
+window.addEventListener('load',()=>{document.querySelectorAll('#hero-hands .cave-hand').forEach(h=>h.classList.add('visible'))});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+
+// Subtle parallax on hero hands
+let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{const y=window.scrollY,h=document.querySelector('.hero').offsetHeight;if(y<h){const hands=document.querySelectorAll('#hero-hands .cave-hand');hands.forEach((hand,i)=>{const speed=0.1+i*0.04;hand.style.marginTop=y*speed+'px'})}ticking=false});ticking=true}});
+</script>
+</body>
+</html>
