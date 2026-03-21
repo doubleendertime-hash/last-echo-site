@@ -186,6 +186,20 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .lore-fact-grid{grid-template-columns:1fr}
   .hero-hand-left,.hero-hand-right{display:none}
 }
+.newsletter-embed{
+  display:flex;
+  justify-content:center;
+  position:relative;
+  z-index:1;
+}
+
+.newsletter-embed iframe{
+  width:100%;
+  max-width:700px;
+  height:720px;
+  border:1px solid rgba(196,113,59,.12);
+  background:var(--cave-mid);
+}
 </style>
 </head>
 <body>
@@ -515,10 +529,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="section-divider" style="margin-left:auto;margin-right:auto"></div>
       <p class="section-subtitle" style="text-align:center">Publication updates, behind-the-scenes worldbuilding, new research papers, and the occasional dispatch from 30,000 years ago. No spam. Unsubscribe anytime.</p>
     </div>
-    <div class="newsletter-form">
-      <a href="https://eepurl.com/jCe_wg" target="_blank" class="btn btn-primary">
-        Join the Mailing List
-      </a>
+    <div class="newsletter-embed reveal reveal-delay-2">
+      <iframe
+        src="https://eepurl.com/jCe_wg"
+        title="The Last Echo mailing list signup"
+        loading="lazy"
+        style="width:100%; max-width:700px; height:720px; border:0; background:transparent;"
+      ></iframe>
     </div>
     <p class="newsletter-note reveal reveal-delay-3">Join early readers and get the first four chapters free when they're available.</p>
   </div>
