@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--cave-deepest:#0f0d0b;--cave-deep:#1a1614;--cave-mid:#231f1b;--cave-light:#2e2824;--cave-surface:#3a322c;--ochre:#7a9aaa;--ochre-bright:#90b2c4;--ochre-deep:#527080;--firelight:#90b2c4;--ember:#7a9aaa;--gold:#7a9aaa;--text-primary:#e8ddd0;--text-secondary:#b8a898;--text-muted:#8a7b6a;--text-faint:#5a4e42;--font-display:'Cinzel',serif;--font-heading:'Cormorant',serif;--font-body:'Alegreya',serif;--section-padding:clamp(80px,12vh,160px);--content-max:1200px;--content-narrow:800px}
+:root{--cave-deepest:#0f0d0b;--cave-deep:#1a1614;--cave-mid:#231f1b;--cave-light:#2e2824;--cave-surface:#3a322c;--ochre:#7a9aaa;--ochre-bright:#90b2c4;--ochre-deep:#527080;--firelight:#90b2c4;--ember:#7a9aaa;--gold:#7a9aaa;--text-primary:#f0e8dc;--text-secondary:#cbbdad;--text-muted:#9a8b7a;--text-faint:#6a5e52;--font-display:'Cinzel',serif;--font-heading:'Cormorant',serif;--font-body:'Alegreya',serif;--section-padding:clamp(80px,12vh,160px);--content-max:1200px;--content-narrow:800px}
 html{scroll-behavior:smooth;background:var(--cave-deepest);color:var(--text-primary)}
 body{font-family:var(--font-body);font-size:clamp(16px,1.1vw,19px);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--ochre-deep);color:var(--text-primary)}
@@ -25,10 +25,10 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .section-hands{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(20px,4vw,60px);height:72px;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:background .4s,box-shadow .4s}
+.nav-links{display:flex;gap:clamp(16px,2.5vw,40px);list-style:none;align-items:center}
 .nav.scrolled{background:rgba(15,13,11,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(122,154,170,.1)}
-.nav-logo{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--ochre);transition:color .3s}
+.nav-logo{font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--ochre);transition:color .3s}
 .nav-logo:hover{color:var(--ochre)}
-.nav-links{display:flex;gap:clamp(16px,2.5vw,40px);list-style:none}
 .nav-links a{font-family:var(--font-body);font-size:14px;color:var(--text-muted);letter-spacing:.04em;transition:color .3s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--ochre);transition:width .3s}
 .nav-links a:hover{color:var(--text-primary)}
@@ -44,7 +44,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .ember{position:absolute;width:2px;height:2px;background:var(--ochre);border-radius:50%;opacity:0;animation:float-ember linear infinite}
 @keyframes float-ember{0%{opacity:0;transform:translateY(0) translateX(0)}10%{opacity:.8}90%{opacity:.3}100%{opacity:0;transform:translateY(-100vh) translateX(40px)}}
 .hero-content{position:relative;z-index:2;max-width:900px}
-.hero-supertitle{font-family:var(--font-body);font-size:clamp(13px,1vw,15px);letter-spacing:.35em;text-transform:uppercase;color:var(--ochre);margin-bottom:32px;opacity:0;animation:fade-up 1s .3s forwards}
+.hero-supertitle{font-family:var(--font-body);font-size:clamp(15px,1vw,17px);letter-spacing:.35em;text-transform:uppercase;color:var(--ochre);margin-bottom:32px;opacity:0;animation:fade-up 1s .3s forwards}
 .hero-title{font-family:var(--font-display);font-size:clamp(42px,7vw,96px);font-weight:400;letter-spacing:.12em;line-height:1.1;color:var(--text-primary);margin-bottom:8px;opacity:0;animation:fade-up 1.2s .5s forwards}
 .hero-title span{display:block;font-size:.38em;letter-spacing:.5em;color:var(--text-muted);margin-top:12px;font-weight:400}
 .hero-divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--ochre),transparent);margin:32px auto;opacity:0;animation:fade-up 1s .8s forwards}
@@ -61,14 +61,14 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .btn-primary:hover{background:var(--ochre-bright);color:var(--cave-deepest);transform:translateY(-2px);box-shadow:0 8px 30px rgba(122,154,170,.3)}
 .btn-ghost{background:transparent;color:var(--text-secondary);border:1px solid var(--cave-surface)}
 .btn-ghost:hover{border-color:var(--ochre);color:var(--ochre);transform:translateY(-2px)}
-.btn-sm{padding:10px 24px;font-size:13px}
+.btn-sm{padding:4px 16px;font-size:13px}
 .nav-links .btn-primary{color:var(--cave-deepest);font-weight:600}
 .nav-links .btn-primary:hover{color:var(--cave-deepest)}
 
 .section{padding:var(--section-padding) clamp(20px,5vw,60px);position:relative}
 .section-inner{max-width:var(--content-max);margin:0 auto;position:relative;z-index:1}
 .section-narrow{max-width:var(--content-narrow);margin:0 auto;position:relative;z-index:1}
-.section-label{font-family:var(--font-body);font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--ochre);margin-bottom:16px}
+.section-label{font-family:var(--font-body);font-size:14px;letter-spacing:.4em;text-transform:uppercase;color:var(--ochre);margin-bottom:16px}
 .section-title{font-family:var(--font-heading);font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.2;color:var(--text-primary);margin-bottom:20px}
 .section-subtitle{font-family:var(--font-body);font-size:clamp(16px,1.2vw,19px);color:var(--text-secondary);line-height:1.7}
 .section-divider{width:40px;height:1px;background:var(--ochre-deep);margin:24px 0}
@@ -81,12 +81,12 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .book-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--ochre-deep),transparent);opacity:0;transition:opacity .4s}
 .book-card:hover{transform:translateY(-4px);border-color:rgba(122,154,170,.2);box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .book-card:hover::before{opacity:1}
-.book-number{font-family:var(--font-display);font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--ochre);margin-bottom:16px}
+.book-number{font-family:var(--font-display);font-size:13px;letter-spacing:.4em;text-transform:uppercase;color:var(--ochre);margin-bottom:16px}
 .book-title{font-family:var(--font-heading);font-size:clamp(24px,2.5vw,34px);font-weight:400;color:var(--text-primary);margin-bottom:8px;line-height:1.2}
-.book-arc{font-family:var(--font-body);font-size:14px;font-style:italic;color:var(--ochre);margin-bottom:20px}
+.book-arc{font-family:var(--font-body);font-size:16px;font-style:italic;color:var(--ochre);margin-bottom:20px}
 .book-description{font-size:15px;color:var(--text-secondary);line-height:1.75}
 .book-card.featured{border-color:rgba(122,154,170,.2);background:linear-gradient(170deg,var(--cave-mid) 0%,rgba(154,79,37,.08) 100%)}
-.book-badge{display:inline-block;font-family:var(--font-body);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ochre);background:rgba(122,154,170,.1);border:1px solid rgba(122,154,170,.2);padding:4px 12px;margin-top:20px}
+.book-badge{display:inline-block;font-family:var(--font-body);font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--ochre);background:rgba(122,154,170,.1);border:1px solid rgba(122,154,170,.2);padding:4px 12px;margin-top:20px}
 
 .lore-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);margin-top:60px;align-items:start}
 .lore-text h3{font-family:var(--font-heading);font-size:clamp(22px,2vw,30px);font-weight:400;color:var(--text-primary);margin-bottom:16px;margin-top:36px}
@@ -98,7 +98,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .lore-quote-box cite{display:block;font-family:var(--font-body);font-size:13px;color:var(--text-muted);font-style:normal;margin-top:16px;letter-spacing:.05em}
 .lore-fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .lore-fact{background:var(--cave-deep);padding:20px;border:1px solid rgba(122,154,170,.06)}
-.lore-fact-number{font-family:var(--font-display);font-size:clamp(24px,2vw,32px);font-weight:400;color:var(--ochre);line-height:1;margin-bottom:6px}
+.lore-fact-number{font-family:var(--font-display);font-size:clamp(26px,2vw,34px);font-weight:400;color:var(--ochre);line-height:1;margin-bottom:6px}
 .lore-fact-label{font-size:12px;color:var(--text-muted);letter-spacing:.05em}
 
 .chapters-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;margin-top:60px}
@@ -121,12 +121,12 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
 .paper-card{background:var(--cave-deep);border:1px solid rgba(122,154,170,.06);padding:clamp(24px,2.5vw,36px);transition:all .35s;display:flex;flex-direction:column}
 .paper-card:hover{border-color:rgba(122,154,170,.2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.25)}
-.paper-category{font-family:var(--font-body);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ochre);margin-bottom:12px}
+.paper-category{font-family:var(--font-body);font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--ochre);margin-bottom:12px}
 .paper-title{font-family:var(--font-heading);font-size:clamp(18px,1.6vw,24px);font-weight:400;color:var(--text-primary);line-height:1.35;margin-bottom:12px}
 .paper-abstract{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:20px;flex-grow:1}
 .paper-meta{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid rgba(122,154,170,.06)}
 .paper-format{font-size:12px;color:var(--text-faint);letter-spacing:.05em}
-.paper-download{font-family:var(--font-body);font-size:13px;color:var(--ochre);letter-spacing:.05em;display:flex;align-items:center;gap:6px;transition:color .3s}
+.paper-download{font-family:var(--font-body);font-size:15px;color:var(--ochre);letter-spacing:.05em;display:flex;align-items:center;gap:6px;transition:color .3s}
 .paper-download:hover{color:var(--firelight)}
 .paper-download svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
@@ -321,7 +321,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         <p class="book-number">Book One</p>
         <h3 class="book-title">The Listening</h3>
         <p class="book-arc">Innocence → Awakening</p>
-        <p class="book-description">Kye hears the world the way no one else can—every creature, every stone, every shift in the wind. But when a wounded stranger arrives at her tribe's shelter, his presence presages a force that will shatter everything she knows. Two deaths, a devastating betrayal, and her first desperate act of power will ultimately drive her from the only home she has ever known.</p>
+        <p class="book-description">She hears the world the way no one else can—every creature, every stone, every shift in the wind. But when a wounded stranger arrives at her tribe's shelter, nothing will ever be the same. Two deaths, a devastating betrayal, and her first desperate act of power will ultimately drive her people from the only home they have ever known.</p>
         <a href="#chapters" class="btn btn-primary" style="margin-top:20px;display:inline-flex">Read the Prologue + First 3 Chapters Free</a>
       </div>
       <div class="book-card reveal reveal-delay-2">
@@ -362,9 +362,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="lore-text reveal">
         <h3>The Life-Song</h3>
         <p>Every living thing carries its own Song. Distinct as a voice, unmistakable as a face. Every place where life has passed retains an echo of what moved through it. The dead sing faintly in the stone where they were laid. A forest hums with the layered Songs of every plant and creature within it.</p>
-        <p>This is not magic. It is simply what the world feels like when you have the capacity to sense it. A constant, synesthetic awareness. Sound that is also texture, color that is also feeling, temperature that is also melody.</p>
+        <p>This is not magic. It is simply what the world feels like when you have the capacity to sense it. A constant, synesthetic awareness — always on, and as individual as a fingerprint. No two Songs are alike.</p>
         <h3>The Setting</h3>
-        <p>Southern Iberia. The Baetic sierra — a sun-warmed limestone country riddled with true-dark caves, draining south to the Mediterranean. Thirty-two thousand years ago, this is the last warm refuge on a cooling continent. Ice sheets advancing, game routes shifting, the world tightening. The Neanderthal bands who have sheltered in these hills for millennia feel the pressure at their backs — and a new people pressing in from the north and east. To the south, across a narrow strait, another landmass is visible on a clear day. The edge of the world. Beyond it, the unknown.</p>
+        <p>Southern Iberia. The Baetic sierra — a sun-warmed limestone country riddled with true-dark caves, draining south to the Mediterranean. Thirty-two thousand years ago, the last warm refuge on a cooling continent. Ice sheets advancing, game routes shifting, the world tightening. The Neanderthal bands who have sheltered in these hills for millennia feel the pressure at their backs — and a new people pressing in from the north and east. To the south, across a narrow strait, another landmass is visible on a clear day. The edge of the world. Beyond it, the unknown.</p>
         <h3>Two Peoples, Two Worldviews</h3>
         <p>The Neanderthals see the world as interconnected. Every creature, every stone, part of a living whole. The anatomically modern Humans see it as a hierarchy to be dominated. Neither view is entirely wrong. The collision between them is the story's philosophical engine.</p>
       </div>
@@ -376,7 +376,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         <div class="lore-fact-grid">
           <div class="lore-fact"><p class="lore-fact-number">~32,000</p><p class="lore-fact-label">Years before present</p></div>
           <div class="lore-fact"><p class="lore-fact-number">3</p><p class="lore-fact-label">Books in the trilogy</p></div>
-          <div class="lore-fact"><p class="lore-fact-number">2</p><p class="lore-fact-label">Species of human</p></div>
+          <div class="lore-fact"><p class="lore-fact-number">2</p><p class="lore-fact-label">Species of Human</p></div>
           <div class="lore-fact"><p class="lore-fact-number">1</p><p class="lore-fact-label">Wolf who steals food</p></div>
         </div>
       </div>
@@ -490,7 +490,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="paper-card reveal reveal-delay-4">
         <p class="paper-category">Climate &amp; Migration</p>
         <h4 class="paper-title">The Closing World: Climate, Competition, and the Last Glacial Maximum</h4>
-        <p class="paper-abstract">As ice sheets advanced and habitable zones shrank, two human species were forced into increasingly overlapping territories. This paper maps the environmental pressures that turned coexistence into collision.</p>
+        <p class="paper-abstract">As ice sheets advanced and habitable zones shrank, two Human species were forced into increasingly overlapping territories. This paper maps the environmental pressures that turned coexistence into collision.</p>
         <div class="paper-meta"><span class="paper-format">PDF · 16 pages</span><a href="#" class="paper-download" onclick="alert('Coming soon! Join the mailing list to be notified.'); return false;">Download <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a></div>
       </div>
       <div class="paper-card reveal reveal-delay-1">
@@ -502,7 +502,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="paper-card reveal reveal-delay-2">
         <p class="paper-category">Ethology &amp; Domestication</p>
         <h4 class="paper-title">Yellow Eyes: Pleistocene Wolf Behavior and the Origins of the Human-Canine Bond</h4>
-        <p class="paper-abstract">Long before agriculture, before civilization, something passed between a wolf and a human. Was the earliest domestication a gradual process of mutual benefit, or a single, improbable act of trust?</p>
+        <p class="paper-abstract">Long before agriculture, before civilization, something passed between a wolf and a Human. Was the earliest domestication a gradual process of mutual benefit, or a single, improbable act of trust?</p>
         <div class="paper-meta"><span class="paper-format">PDF · 12 pages</span><a href="#" class="paper-download" onclick="alert('Coming soon! Join the mailing list to be notified.'); return false;">Download <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a></div>
       </div>
     </div>
